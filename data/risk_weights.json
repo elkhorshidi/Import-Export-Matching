@@ -1,0 +1,22 @@
+[
+  {"id": "written_contract", "label_fa": "قرارداد کتبی وجود دارد", "weight": 8, "explanation_fa": "قرارداد کتبی باید تعهدات مالیاتی، گمرکی، VAT، رفع تعهد ارزی و وثایق را مشخص کند."},
+  {"id": "hs_verified", "label_fa": "HS Code بررسی شده", "weight": 8, "explanation_fa": "تعرفه اشتباه می‌تواند باعث اختلاف حقوق ورودی، مجوزها و جرایم گمرکی شود."},
+  {"id": "product_permits_verified", "label_fa": "مجوزهای کالا بررسی شده", "weight": 7, "explanation_fa": "مجوزهای ثبت سفارش، استاندارد، صمت یا سایر مراجع باید پیش از اقدام کنترل شوند."},
+  {"id": "invoice_amount_defined", "label_fa": "مبلغ فاکتور داخلی مشخص است", "weight": 6, "explanation_fa": "مبلغ فاکتور داخلی مبنای VAT فروش و سناریوهای مالیات عملکرد است."},
+  {"id": "import_vat_payer_defined", "label_fa": "پرداخت‌کننده VAT واردات مشخص است", "weight": 6, "explanation_fa": "باید مشخص باشد پرداخت نقدی VAT واردات با صاحب کارت است یا مجری."},
+  {"id": "domestic_vat_payer_defined", "label_fa": "پرداخت‌کننده VAT فروش داخلی مشخص است", "weight": 6, "explanation_fa": "اگر VAT فروش از خریدار دریافت نشود، می‌تواند سود طرفین را کاهش دهد."},
+  {"id": "einvoice_issued", "label_fa": "صورتحساب الکترونیکی صادر می‌شود", "weight": 8, "explanation_fa": "عدم صدور صورتحساب در سامانه مؤدیان ریسک VAT و مالیات عملکرد ایجاد می‌کند."},
+  {"id": "buyer_confirms_einvoice", "label_fa": "خریدار داخلی صورتحساب را تأیید می‌کند", "weight": 7, "explanation_fa": "تأیید خریدار برای دفاع از فروش داخلی و اعتبار VAT اهمیت دارد."},
+  {"id": "inta_checked", "label_fa": "اینتاکد بررسی شده", "weight": 8, "explanation_fa": "اینتاکد و ضریب سود باید با فعالیت و پرونده مالیاتی صاحب کارت سازگار باشد."},
+  {"id": "income_tax_responsibility", "label_fa": "مالیات عملکرد تعیین تکلیف شده", "weight": 8, "explanation_fa": "مسئولیت مالیات عملکرد و مبنای شناسایی درآمد باید قراردادی و حسابداری مشخص شود."},
+  {"id": "customs_responsibility", "label_fa": "مسئولیت گمرکی مشخص است", "weight": 8, "explanation_fa": "اختلاف ارزش، تعرفه، مجوز و جرایم گمرکی باید به طرف مسئول تخصیص یابد."},
+  {"id": "export_obligation_path", "label_fa": "مسیر رفع تعهد ارزی تأیید شده", "weight": 9, "explanation_fa": "مسیر تسویه رفع تعهد باید قبل از معامله قابل اجرا و مستند باشد."},
+  {"id": "trade_system_control", "label_fa": "صاحب کارت کنترل سامانه جامع تجارت دارد", "weight": 7, "explanation_fa": "صاحب کارت نباید کنترل دسترسی سامانه جامع تجارت و عملیات ثبت را از دست بدهد."},
+  {"id": "operator_collateral", "label_fa": "مجری وثیقه معتبر می‌دهد", "weight": 10, "explanation_fa": "وثیقه معتبر ابزار اصلی پوشش ریسک‌های مالیاتی، گمرکی و رفع تعهد است."},
+  {"id": "tax_risk_collateral", "label_fa": "ریسک مالیاتی با وثیقه پوشش داده شده", "weight": 9, "explanation_fa": "وثیقه مالیاتی بهتر است بر مبنای بدترین سناریوی مالیات عملکرد باشد."},
+  {"id": "customs_risk_collateral", "label_fa": "ریسک گمرکی با وثیقه پوشش داده شده", "weight": 9, "explanation_fa": "ریسک ارزش‌گذاری، حقوق ورودی، سود بازرگانی و جرایم باید پوشش داده شود."},
+  {"id": "vat_credit_rejection_covered", "label_fa": "ریسک رد اعتبار VAT پوشش داده شده", "weight": 9, "explanation_fa": "رد اعتبار VAT واردات یا صادرات می‌تواند بدهی نقدی ایجاد کند."},
+  {"id": "delayed_clearance_covered", "label_fa": "ریسک تأخیر ترخیص پوشش داده شده", "weight": 6, "explanation_fa": "تأخیر ترخیص می‌تواند هزینه انبارداری، دموراژ و ریسک قراردادی ایجاد کند."},
+  {"id": "demurrage_covered", "label_fa": "ریسک دموراژ پوشش داده شده", "weight": 5, "explanation_fa": "مسئولیت دموراژ و سقف آن باید در قرارداد روشن باشد."},
+  {"id": "auditor_approval", "label_fa": "حسابدار/حسابرس مدل را تأیید کرده", "weight": 8, "explanation_fa": "مدل ثبت درآمد، هزینه و VAT باید توسط حسابدار یا حسابرس صاحب کارت تأیید شود."}
+]
