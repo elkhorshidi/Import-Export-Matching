@@ -32,6 +32,7 @@ st.set_page_config(page_title="exporter_card_import_calculator", layout="wide")
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
     :root {
         --bg: #f5f7fb;
         --card: #ffffff;
@@ -45,16 +46,30 @@ st.markdown(
         --red: #dc2626;
         --slate: #475569;
     }
+    * {
+        font-family: 'Vazirmatn', sans-serif !important;
+    }
     html, body, [class*="css"], .stApp {
         direction: rtl; text-align: right; background: var(--bg); color: var(--text);
+        font-family: 'Vazirmatn', sans-serif !important;
+    }
+    h1, h2, h3, h4, h5, h6, p, span, div, label, input, textarea, select, button,
+    [data-testid="stMarkdownContainer"], [data-testid="stWidgetLabel"],
+    [data-testid="stMetric"], [data-testid="stMetricLabel"], [data-testid="stMetricValue"],
+    [data-testid="stDataFrame"], [data-testid="stTable"], [role="table"] {
+        font-family: 'Vazirmatn', sans-serif !important;
     }
     .main .block-container {
         max-width: 1380px; padding-top: 1.4rem; padding-bottom: 3rem;
     }
     [data-testid="stSidebar"] {
         direction: rtl; text-align: right; background: #0f172a; color: #f8fafc;
+        font-family: 'Vazirmatn', sans-serif !important;
     }
-    [data-testid="stSidebar"] * { text-align: right; }
+    [data-testid="stSidebar"] * {
+        text-align: right;
+        font-family: 'Vazirmatn', sans-serif !important;
+    }
     [data-testid="stSidebar"] label, [data-testid="stSidebar"] p { color: #e2e8f0; }
     [data-testid="stSidebar"] [role="radiogroup"] label {
         border-radius: 12px; padding: 6px 8px; margin-bottom: 3px;
@@ -152,6 +167,7 @@ st.markdown(
     .download-card p { color: #64748b; line-height: 1.8; min-height: 64px; }
     .stButton button, .stDownloadButton button {
         border-radius: 12px !important; font-weight: 700 !important;
+        font-family: 'Vazirmatn', sans-serif !important;
     }
     </style>
     """,
