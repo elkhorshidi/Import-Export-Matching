@@ -48,6 +48,7 @@ st.markdown(
     }
     * {
         font-family: 'Vazirmatn', sans-serif !important;
+        direction: rtl;
     }
     html, body, [class*="css"], .stApp {
         direction: rtl; text-align: right; background: var(--bg); color: var(--text);
@@ -58,6 +59,28 @@ st.markdown(
     [data-testid="stMetric"], [data-testid="stMetricLabel"], [data-testid="stMetricValue"],
     [data-testid="stDataFrame"], [data-testid="stTable"], [role="table"] {
         font-family: 'Vazirmatn', sans-serif !important;
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    [data-testid="stMarkdownContainer"], [data-testid="stWidgetLabel"], label,
+    .stTextInput, .stNumberInput, .stSelectbox, .stRadio, .stCheckbox,
+    .stAlert, .stDataFrame, .stTable {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    input, textarea {
+        direction: ltr !important;
+        text-align: left !important;
+        unicode-bidi: plaintext !important;
+    }
+    button {
+        direction: rtl !important;
+        text-align: center !important;
+    }
+    div[data-testid="stDataFrame"] div, div[data-testid="stTable"] div,
+    div[data-testid="stDataFrame"] span, div[data-testid="stTable"] span {
+        direction: rtl !important;
+        text-align: right !important;
     }
     .main .block-container {
         max-width: 1380px; padding-top: 1.4rem; padding-bottom: 3rem;
@@ -104,6 +127,7 @@ st.markdown(
         background: var(--card); border: 1px solid #e2e8f0; border-right: 5px solid var(--slate);
         border-radius: 18px; padding: 16px 17px; min-height: 126px;
         box-shadow: 0 10px 26px rgba(15, 23, 42, .06); margin-bottom: 12px;
+        direction: rtl; text-align: right;
     }
     .kpi-title { color: #64748b; font-size: .9rem; margin-bottom: 8px; }
     .kpi-value { color: #0f172a; font-size: 1.35rem; font-weight: 800; line-height: 1.55; }
@@ -127,25 +151,30 @@ st.markdown(
         background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px;
         padding: 16px 18px; margin: 12px 0;
         box-shadow: 0 8px 26px rgba(15, 23, 42, .05);
+        direction: rtl; text-align: right;
     }
     .soft-card h3 { margin: 0 0 8px 0; color: #0f172a; font-size: 1.05rem; }
     .soft-card p { margin: 0; color: #475569; line-height: 1.9; }
     .guide-box {
         background: #eff6ff; border: 1px solid #bfdbfe; border-right: 5px solid var(--blue);
         border-radius: 14px; padding: 12px 14px; color: #1e3a8a; line-height: 1.9; margin: 10px 0;
+        direction: rtl; text-align: right;
     }
     .warning-panel {
         background: #fff7ed; border: 1px solid #fed7aa; border-right: 5px solid var(--orange);
         border-radius: 16px; padding: 14px 16px; margin: 12px 0; color: #7c2d12;
+        direction: rtl; text-align: right;
     }
     .risk-box {
         background: #fff7ed; border: 1px solid #fed7aa; border-right: 5px solid var(--orange);
         border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; line-height: 1.8;
+        direction: rtl; text-align: right;
     }
     .check-card {
         background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
         padding: 13px 14px; margin-bottom: 10px; min-height: 132px;
         box-shadow: 0 8px 22px rgba(15, 23, 42, .045);
+        direction: rtl; text-align: right;
     }
     .check-card-open-high {
         background: #fff7ed; border-color: #fb923c; border-right: 5px solid var(--orange);
@@ -162,6 +191,7 @@ st.markdown(
     .download-card {
         background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px;
         padding: 16px; min-height: 190px; box-shadow: 0 8px 24px rgba(15, 23, 42, .05);
+        direction: rtl; text-align: right;
     }
     .download-card h3 { margin: 0 0 8px 0; color: #0f172a; font-size: 1.08rem; }
     .download-card p { color: #64748b; line-height: 1.8; min-height: 64px; }
@@ -253,6 +283,23 @@ def fmt_foreign(value: float, unit: str) -> str:
     return f"{float(value):,.0f} {unit}"
 
 
+def format_number(value: Any) -> str:
+    try:
+        return f"{float(value or 0):,.0f}"
+    except (TypeError, ValueError):
+        return "0"
+
+
+def parse_number(text: Any) -> float:
+    cleaned = str(text or "").replace(",", "").replace("٬", "").strip()
+    if not cleaned:
+        return 0.0
+    try:
+        return max(float(cleaned), 0.0)
+    except ValueError:
+        return 0.0
+
+
 def fmt_percent_readable(value: float) -> str:
     return f"{float(value):g}%"
 
@@ -264,20 +311,32 @@ def readable_preview(value: float, unit: str) -> None:
 def money_input(
     label: str,
     key: str,
+    default: float | None = None,
     help_text: str | None = None,
     unit: str = "تومان",
     step: float = 1_000_000.0,
 ) -> float:
-    value = st.number_input(
+    del step
+    text_key = f"{key}_text"
+    fallback = DEFAULTS.get(key, 0.0) if default is None else default
+    current_value = st.session_state.get(key, fallback)
+    if text_key in st.session_state:
+        parsed_value = parse_number(st.session_state[text_key])
+        st.session_state[key] = parsed_value
+        current_value = parsed_value
+    else:
+        st.session_state.setdefault(key, fallback)
+        current_value = st.session_state[key]
+    st.session_state[text_key] = format_number(current_value)
+    text_value = st.text_input(
         label,
-        min_value=0.0,
-        step=step,
-        format="%.0f",
-        key=key,
+        key=text_key,
         help=help_text,
     )
+    value = parse_number(text_value)
+    st.session_state[key] = value
     readable_preview(value, unit)
-    return float(value)
+    return value
 
 
 def percent_input(label: str, key: str, help_text: str | None = None) -> float:
